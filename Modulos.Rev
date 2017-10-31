@@ -1,4 +1,5 @@
-/* INIC ARBOL.
+/* //////////////////////////////////////////////////////////////////////////////////////////////////
+INIC ARBOL.
 */
 
 nodoArbol * inicArbol()
@@ -6,7 +7,8 @@ nodoArbol * inicArbol()
     return NULL;
 }
 
-/* CREAR NODO ARBOL: Pasamos solo una variable del tipo 'persona' por parametro.
+/* //////////////////////////////////////////////////////////////////////////////////////////////////
+CREAR NODO ARBOL: Pasamos solo una variable del tipo 'persona' por parametro.
                      Creamos un puntero 'nodoArbol *' que guarde la dirección de un nodo del tamaño de un nodoArbol.
                      Esta función debe ser parte de otra donde una función anterior devuelva 'la persona p'.
 */
