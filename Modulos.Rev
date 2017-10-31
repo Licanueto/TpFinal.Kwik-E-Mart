@@ -1,1 +1,31 @@
+/* INIC ARBOL.
+*/
 
+nodoArbol * inicArbol()
+{
+    return NULL;
+}
+
+/* CREAR NODO ARBOL: Pasamos solo una variable del tipo 'persona' por parametro.
+                     Creamos un puntero 'nodoArbol *' que guarde la dirección de un nodo del tamaño de un nodoArbol.
+                     Esta función debe ser parte de otra donde una función anterior devuelva 'la persona p'.
+*/
+
+nodoArbol * crearNodoArbol(persona p)
+{
+    nodoArbol * aux=(nodoArbol*)malloc(sizeof(nodoArbol));
+    persona auxPersona;
+    auxPersona.id=p.id;
+    strcpy(auxPersona.nombres,p.nombres);
+    strcpy(auxPersona.apellido,p.apellido);
+    auxPersona.tipoCliente=p.tipoCliente;
+    auxPersona.medioPago=p.medioPago;
+    auxPersona.cantArticulos=p.cantArticulos;
+    auxPersona.tiempoEspera=p.tiempoEspera;
+    auxPersona.tiempoProcesado=p.tiempoProcesado;
+    auxPersona.eliminado=p.eliminado;
+    aux->izq=NULL;
+    aux->der=NULL;
+
+    return aux;
+}
