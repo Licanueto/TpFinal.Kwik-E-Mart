@@ -31,3 +31,22 @@ nodoArbol * crearNodoArbol(persona p)
 
     return aux;
 }
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////
+PASAR DE ARCHIVO A ARBOL (INCOMPLETO)
+*/
+
+nodo * ArchivoArbol(nodo * nodoArbol, char nombreArchivo[30])
+{
+ FILE *archi;
+ archi = fopen(nombre, "rb");
+ persona a;
+ if(archi!= NULL)
+    {
+    while(fread(&a, sizeof(persona), 1, archi)>0)
+    {
+        insertar//INCOMPLETO
+    }
+}
+    fclose(archi);
+}
