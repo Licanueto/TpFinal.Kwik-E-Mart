@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/*                                    Funciones de Listas                                       */
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
 nodo* inicLista()
 {
     return NULL;
@@ -34,6 +40,7 @@ nodo* agregarAlFinal (nodo* lista, nodo* nuevoNodo)
     return (lista);
 }
 
+
 nodo* buscaUltimoNodo (nodo* lista)
 {
     nodo* ultimoNodo = lista;
@@ -44,7 +51,6 @@ nodo* buscaUltimoNodo (nodo* lista)
     }
     return ultimoNodo;
 }
-
 nodo* buscaNodoSegunNombre (nodo* lista,char nombre[])
 {
     nodo* seg = lista;
@@ -60,6 +66,7 @@ nodo* buscaNodoSegunNombre (nodo* lista,char nombre[])
     }
     return found;
 }
+
 
 nodo* borrarNodo (nodo* lista, char nombre[])
 {
@@ -86,6 +93,7 @@ nodo* borrarNodo (nodo* lista, char nombre[])
     return lista;
 }
 
+
 void mostrarLista (nodo* lista)
 {
     nodo* seg = lista;
@@ -95,7 +103,6 @@ void mostrarLista (nodo* lista)
         seg = seg->siguiente;
     }
 }
-
 void mostrarNodo (nodo* nodin)
 {
     printf("\n\n                       Id :  %d",nodin->id);
@@ -107,4 +114,30 @@ void mostrarNodo (nodo* nodin)
     printf("\n         Tiempo de Espera :  %d",nodin->tiempoEspera);
     printf("\n         Tiempo Procesado :  %d",nodin->tiempoProcesado);
     printf("\n                Eliminado :  %d",nodin->eliminado);
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/*                                    Funciones de Filas                                       */
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+Fila* inicFila ()
+{
+    return NULL;
+}
+
+Fila* agregar (nodo* inicio, nodo* final)
+{
+    Fila nuevaFila;
+    nuevaFila->inicio = inicio;
+    nuevaFila->final = final;
+    return (nuevaFila);
+}
+
+Fila* quitar ()
+{
+    return wha?; //yet to be
 }
