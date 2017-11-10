@@ -1,4 +1,4 @@
-#include "libArbolesHeader.h"
+#include "libArbol.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,7 +11,7 @@ nodoArbol* inicArbol()
 
 // Crea nodo Arbol
 nodoArbol* crearNodoArbol (int legajo, char nombre[20])
-{   /// Esta funcion no se usa en el main, es necesaria para las funciones de inserción
+{   /// Esta funcion no se usa en el main, es necesaria para las funciones de inserciÃ³n
     nodoArbol * aux = (nodoArbol*)malloc(sizeof(nodoArbol));
     aux -> legajo = legajo;
     strcpy(aux -> nombre, nombre);
@@ -29,7 +29,7 @@ nodoArbol* insertarNodoArbol (nodoArbol * arbol, int legajo, char nombre[20])
     else
     {
         if (legajo > arbol->legajo)
-            arbol->der = insertarNodoArbol (arbol->der,legajo,nombre);       ///    Nótese la recursividad
+            arbol->der = insertarNodoArbol (arbol->der,legajo,nombre);       ///    NÃ³tese la recursividad
         else arbol->izq = insertarNodoArbol (arbol->izq,legajo,nombre);
     }
     return arbol;
