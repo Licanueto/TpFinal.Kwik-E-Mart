@@ -1,0 +1,215 @@
+UTN – UA Mar del Plata – TSP
+TSP - Laboratorio 2
+Trabajo Práctico Segundo Parcial
+
+Noviembre 2017
+Integrantes del grupo
+Nota
+
+Introducción 
+Debemos resolver la problemática que nos plantea un supermercado, sobre las cajas de atención que ofrece a sus clientes. El supermercado quiere saber cual es el método de atención más apropiado para lograr que sus clientes esperen lo menos posible.
+Aplicando los conocimientos que ya adquirimos como alumnos de la cátedra “Arquitectura y SIstemas Operativos”, desarrollaremos diversos algoritmos sobre planificación de procesos (en este caso, los procesos serán las personas que debemos atender) para determinar cuál es la mejor opción. Además, calcularemos distintos tiempos de ejecución aplicando conceptos de la cátedra “Estadística”. (rendimiento, tiempo de ejecución, tiempo de espera, probabilidad) (tiempo de respuesta, de espera, de retorno)
+Fundamentación
+El valor pedagógico de la propuesta se apoya en el aprendizaje colaborativo y la integración de contenidos de otras asignaturas a partir del desarrollo de un proyecto de software. Para que este tipo de proyectos sea más exitoso, deben llevarse a cabo desde un enfoque que facilite alcanzar los Objetivos de Aprendizaje propuestos.
+Una de las ideas centrales es desarrollar competencias profesionales y preparar al futuro programador para el mundo laboral y el trabajo en equipo.
+En un ambiente de aprendizaje colaborativo, los estudiantes:
+Construyen conocimiento y en lugar de recibirlos en forma pasiva;
+Se involucran y comprometen directamente con el descubrimiento de nuevo conocimiento;
+Se exponen a puntos de vista alternativos e ideas contrapuestas, de forma tal que pueden sacar sus propias conclusiones y así transformar conocimientos y experiencias previas y de esta manera comprender con mayor profundidad;
+Transfieren conocimientos y habilidades nuevos a nuevas situaciones o circunstancias;
+Se responsabilizan y apropian tanto de su aprendizaje continuo de contenidos curriculares como del desarrollo propio de competencias;
+Los estudiantes colaboran para el aprendizaje del grupo y el grupo colabora en el aprendizaje individual de estos.
+Objetivos
+De aprendizaje:
+Incorporar Árboles Binarios y Estructuras Compuestas.
+Incorporar algoritmos de Planificación de procesos.
+Metodológicos:
+Ser capaces de trabajar en forma colaborativa, ya que el trabajo se desarrollará en grupos de 2 (dos) alumnos.
+Lograr integrar contenidos de otras asignaturas.
+Tiempo entrega: Se establecerán dos fechas de entrega durante la cursada. Deberán presentar el trabajo ambos alumnos en grupo, mostrando los avances conseguidos o el sistema funcionando en su totalidad.
+
+Modo de Evaluación del Trabajo Práctico
+
+Se establecen dos fechas para la entrega del trabajo práctico, correspondientes a las instancias de Segundo Parcial y Recuperatorio del Segundo Parcial.
+Si el sistema está codificado en su totalidad y funciona correctamente, se considerará aprobado con la nota correspondiente, de acuerdo a la puntuación en cada inciso.
+Si el sistema no está codificado en su totalidad (como mínimo un 50 % en cada inciso), se considerará desaprobado y el grupo presentará la versión final en la fecha de recuperatorio.
+En la fecha de recuperatorio deberá cumplir las pautas mínimas establecidas precedentemente para la aprobación de la instancia recuperatoria.
+
+
+
+
+PAUTAS GENERALES
+Origen de los datos:
+Se nos pide desarrollar un sistema de atención de una cadena de supermercados. Se tiene un grupo de personas que deben pagar sus compras, almacenadas en un archivo binario. A partir de dicha información se generará un árbol binario (ordenado por nombre), sobre el cual trabajaremos para distribuir a los clientes en las distintas cajas de atención.
+Para que la asignación de los clientes sobre las cajas no sea siempre la misma, deberán recorrer el árbol con los tres algoritmos que existen (in-order, pre-order y post-order). De esta manera, lograremos una distribución aleatoria.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Como ya se vio en la primer parte del TP, el sistema contará con dos ABML (alta, baja, modificación y listado), uno de Usuarios y otro de Personas. Cabe aclarar que los usuarios no tienen nada que ver con las personas. El usuario nos servirá para ingresar al sistema (login). Pueden usar lo realizado en el primer cuatrimestre o de lo contrario se les brindarán los algoritmos para encriptar y desencriptar contraseñas usando la siguiente estructura de Usuarios.
+ 
+Estructura de Usuarios
+typedef struct 
+{
+        int id;
+        char nombre[30];
+        char apellido[30];
+        char usuario[20];
+        int pass[2][5];
+        int eliminado;
+} usuario;
+
+Para acceder al sistema, los usuarios del mismo deberán loguearse. Luego, podrán ingresar a las diferentes funcionalidades del mismo, desde un menú de opciones. 
+Si el usuario no se encuentra registrado, o la contraseña no coincide, el sistema evitará el acceso no autorizado e informará lo sucedido. 
+Por defecto, el sistema contará con el usuario y password “admin”, para facilitar el ingreso del docente al momento de la evaluación. Dicho usuario estará registrado en el correspondiente archivo binario.
+
+Para el ABML (alta, baja, modificación y listado) de Personas tienen que tener en cuenta que los campos marcados con *** no se ingresan por teclado, se les asigna el valor 0 (cero).
+
+Estructura de Persona (cliente)
+typedef struct {
+        int id;
+        char apellido[30];
+        char nombres [40];
+        int tipoCliente; 			/// Prioridad 1:embarazada, 2:jubilado y 3:cliente común
+        int medioPago;			/// 1:efectivo, 2:crédito y 3:todos
+        int cantArticulos;			/// es el tiempo de ejecución
+        int tiempoEspera; 	***	/// es el tiempo de respuesta
+        int tiempoProcesado;	*** 	/// es el tiempo que ya fue procesado en la línea de caja
+        int eliminado;			/// 1: eliminado, 0: activo
+} persona; 
+
+A los fines de cargar y mostrar el archivo, desarrolle la funcionalidad necesaria. Dar de alta como mínimo 40 personas en el archivo.
+------------------------------------------------------------------------------------------------------------------------------------------------
+Estructura de Árbol [ 15 puntos ]
+
+typedef struct
+{
+      persona p;
+      struct nodoArbol * izq;
+      struct nodoArbol * der;
+} nodoArbol;
+
+Deberán codificar todas las funciones necesarias para administrar el TDA Árbol, a saber (como mínimo):
+inicArbol
+crearNodoArbol
+insertarNodoArbol (ordenado por nombre o apellido)
+mostrarArbol  (recorriendo inOrder, postOrder, preOrder) 
+borrarUnNodoArbol (buscarlo por nombre o apellido) 
+
+pasarDeArbolToLineaDeCajas (recorriendo inOrder, postOrder, preOrder) 
+// subprogramas, son tres funciones distintas: estas funciones pasan del árbol al ADF y ubica a los clientes de acuerdo al tipo de pago en la primer caja que encuentre abierta
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Estructura de Lista (doblemente enlazada) y Estructura de Fila  [ 20 puntos ]
+
+typedef struct{
+        persona cliente;
+        struct nodo * siguiente;
+        struct nodo * anterior; 
+} nodo;
+
+Deberán codificar todas las funciones necesarias para administrar el TDA Lista doble, a saber (como mínimo):
+
+inicLista
+crearNodoLista
+agregarAlPrincipio
+agregarAlFinal
+agregarEnOrdenTipoCli (por tipo de cliente)
+agregarEnOrdenPorCant (por cantidad de productos)
+mostrarLista
+borrarNodo (por nombre de cliente)
+borrarPrimero (para vaciar la fila)
+
+----------------------
+
+typedef struct{
+        struct nodo * inicio;
+        struct nodo * final; 
+} Fila;
+
+y sus funciones:
+
+inicFila
+agregar
+quitar
+mostrar
+filaVacia
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Estructura de Arreglo de Filas (estas son las cajas): [ 20 puntos ]
+Las cajas se implementan sobre un Arreglo de Filas, 
+
+typedef struct
+{
+        int nro_de_caja;
+        char nombreCajero[40];
+        int tipo_pago;                 //  1 efectivo, 2 crédito o débito, 3 todos
+        int abiertaOcerrada;
+        char algoritmoPlanificacion[30];  // debe informar que tipo de alg. de planificación utiliza la caja      
+        Fila filita ;
+} caja;
+
+En el programa principal (main) se definirá un Arreglo de Filas de dimensión 8, con 2 cajas de cada tipo asignado. Las mismas podrán estar abiertas (por defecto) o cerradas.
+Deberán codificar todas las funciones necesarias para administrar el TDA Arreglo de Filas, a saber (como mínimo):
+
+agregarCaja // crea una nueva caja en el arreglo
+abrirOcerrarCaja // abre o cierra una caja a requerimiento (si hay clientes no puede cerrarse)
+buscarCaja // busca una caja de acuerdo a su tipo de pago y la retorna (si es que está abierta)
+mostrarCaja // muestra la caja (sus datos) y toda la fila de clientes que esperan
+agregarClienteACaja // agrega un cliente a la caja de acuerdo al orden que plantea el algoritmo de planificación que aplica la caja, siempre y cuando la caja está abierta
+agregarClienteACajaEnTiempoDeterminado // 
+atenderClientes // atiende a los clientes de acuerdo al algoritmo de planificación que aplica la caja, calculando el tiempo de espera de cada cliente
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Algoritmos de planificación para las cajas: [ 25 puntos ]
+Deberán desarrollar el comportamiento de cada caja, según los siguientes algoritmos, que definen el tipo de caja. Todos los grupos desarrollarán los algoritmos FIFO y RR, los demás será distribuidos por el docente. Se crearán dos cajas por cada algoritmo de planificación desarrollado.
+
+FIFO no apropiativo
+SJF no apropiativo
+SRTF (SJF apropiativo)
+Prioridades apropiativo
+Prioridades no apropiativo
+RR apropiativo con Quantum _ _ _ _
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+La función principal - Main() y menús:  [ 10 puntos ]
+
+El sistema deberá contar con una presentación amigable con el usuario, construir menús de acceso a las diferentes estructuras y funcionalidades del sistema.
+
+Para iniciar el sistema de atención se pasarán los datos del árbol a las cajas, recorriendo el mismo por los algoritmos PreOrden, InOrden y PostOrden (se podrá elegir método de ordenación mediante menú).
+La asignación a las diferentes cajas será según el tipo de medio de pago, dependiendo de la cantidad de personas en las cajas, se elegirá la que tenga menos.
+
+Pasos que se deben tener en cuenta:
+Carga de los procesos (clientes) según método de recorrido y se muestran como quedan las cajas (sin aplicar algoritmos)
+Calcular y mostrar los tiempos según Algoritmos de Planificación
+Ingresar procesos con distintas prioridades y muestra cómo quedan las colas. Se podrá elegir ingresar un tipo de persona “x” en caja “x” en tiempo “x” y ver cómo queda la cola de procesos en ese caso. (Una de las evaluaciones del sistema consistirá en solicitar al alumno que ingrese por teclado un cliente con determinadas características y a partir de este ingreso a la cola de prioridades analizar el comportamiento del sistema y los movimientos en la cola de prioridades.)
+Ejecutar y mostrar tiempos nuevos.
+Repetir.
+Vaciar una caja, proceso a proceso. 
+Recorrer las cajas y calcular tiempos de espera promedios.
+
+Los tiempos a calcular son:
+Tiempo de ejecución
+Tiempo de respuesta
+Promedios de ambos
+
+Podrán sumar funcionalidad extra (si quieren), siempre y cuando se justifique.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Informe final - Documentación a entregar: [ 10 puntos ]
+Diario de trabajo. Semana a semana qué actividades se desarrollaron y el responsable de cada una.
+Matriz de soluciones. Que problema tuvieron y cómo lo resolvieron.
+Diagrama de estructuras. Esquema de las estructuras utilizadas y sus relaciones.
+Bosquejo general del sistema. Funciones utilizadas y sus relaciones.
+Bosquejo, dibujo o animación de cómo funciona el sistema de cajas con sus algoritmos
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Al realizar la entrega final, deberán tener en cuenta los siguientes puntos:
+Informe
+Código del sistema completo y compilado sin errores
+Explicación presencial del sistema
+
+
