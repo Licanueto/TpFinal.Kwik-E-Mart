@@ -1,10 +1,17 @@
-                                #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+// Librerias personales:
+//#include "libArbol.h"
+//#include "libCajas.h"
+//#include "libListasYFilas.h"
 #include "libTpFinal.h"
 
-//  Principales
+char archivoUsuarios[]={"usuarios.dat"};
+char archivoPersonas[]={"personas.dat"};
+
+//  Funciones Principales
 
 void login(char archivoUsuarios[],char archivoPersonas[])
 {
@@ -210,6 +217,7 @@ int admin(char archivoUsuarios[],char archivoPersonas[]) // Retorna 1 cuando se 
 }
 
 
+
 //  Carga
 
 void cargaUsuarios(char nombre_archivo_usuarios[])
@@ -334,6 +342,320 @@ int cargaPersonas(char nombre_archivo_personas[]) // retorna el id asignado al c
     fclose(archi);
     return(a.id);
 }
+
+void cargaPersonasAlArchivo ()
+{
+    FILE * archi;
+    stPersona a;
+
+    archi=fopen(archivoPersonas,"a+b");
+
+    if (archi != NULL && cantidadPersonasCargadas(archivoPersonas)<30)
+    {
+        a.id=0;
+        strcpy(a.apellido,"Mendelez");
+        strcpy(a.nombres,"Marta");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=1;
+        strcpy(a.apellido,"Brites");
+        strcpy(a.nombres,"Bartolo");
+        a.tipoCliente = 2;
+        a.medioPago = 2;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=2;
+        strcpy(a.apellido,"Caleno");
+        strcpy(a.nombres,"Carlos");
+        a.tipoCliente = 3;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=3;
+        strcpy(a.apellido,"D'Lorean");
+        strcpy(a.nombres,"Dante");
+        a.tipoCliente = 2;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=4;
+        strcpy(a.apellido,"Ezeto");
+        strcpy(a.nombres,"Esteban");
+        a.tipoCliente = 3;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=5;
+        strcpy(a.apellido,"Fernandez");
+        strcpy(a.nombres,"Fernanda");
+        a.tipoCliente = 2;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=6;
+        strcpy(a.apellido,"Garmendia");
+        strcpy(a.nombres,"Guillermina");
+        a.tipoCliente = 1;
+        a.medioPago = 3;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=7;
+        strcpy(a.apellido,"Møller");
+        strcpy(a.nombres,"Hilde");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=8;
+        strcpy(a.apellido,"Iriarte");
+        strcpy(a.nombres,"Iara");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=9;
+        strcpy(a.apellido,"Johnson");
+        strcpy(a.nombres,"Alejandra");
+        a.tipoCliente = 1;
+        a.medioPago = 2;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=10;
+        strcpy(a.apellido,"Twain");
+        strcpy(a.nombres,"Mark");
+        a.tipoCliente = 3;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=11;
+        strcpy(a.apellido,"Lennon");
+        strcpy(a.nombres,"John");
+        a.tipoCliente = 2;
+        a.medioPago = 3;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=12;
+        strcpy(a.apellido,"Bukowsky");
+        strcpy(a.nombres,"Charles");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=13;
+        strcpy(a.apellido,"Žižek");
+        strcpy(a.nombres,"Slavoj");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=14;
+        strcpy(a.apellido,"Lynch");
+        strcpy(a.nombres,"David");
+        a.tipoCliente = 3;
+        a.medioPago = 2;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=15;
+        strcpy(a.apellido,"Schwarzenegger");
+        strcpy(a.nombres,"Arnold");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=16;
+        strcpy(a.apellido,"Cornell");
+        strcpy(a.nombres,"Chris");
+        a.tipoCliente = 3;
+        a.medioPago = 2;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=1;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=17;
+        strcpy(a.apellido,"CK");
+        strcpy(a.nombres,"Louis");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=18;
+        strcpy(a.apellido,"Seinfeld");
+        strcpy(a.nombres,"Jerry");
+        a.tipoCliente = 2;
+        a.medioPago = 2;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=19;
+        strcpy(a.apellido,"Burnham");
+        strcpy(a.nombres,"Bo");
+        a.tipoCliente = 3;
+        a.medioPago = 3;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=20;
+        strcpy(a.apellido,"Nolan");
+        strcpy(a.nombres,"Christopher");
+        a.tipoCliente = 2;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=21;
+        strcpy(a.apellido,"Iñarritu");
+        strcpy(a.nombres,"Alejandro");
+        a.tipoCliente = 3;
+        a.medioPago = 2;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=22;
+        strcpy(a.apellido,"Minchin");
+        strcpy(a.nombres,"Tim");
+        a.tipoCliente = 3;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=23;
+        strcpy(a.apellido,"Rigby");
+        strcpy(a.nombres,"Eleanor");
+        a.tipoCliente = 1;
+        a.medioPago = 3;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=24;
+        strcpy(a.apellido,"McKenzie");
+        strcpy(a.nombres,"Father");
+        a.tipoCliente = 3;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=25;
+        strcpy(a.apellido,"Cletus");
+        strcpy(a.nombres,"Sabrina");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=26;
+        strcpy(a.apellido,"Cletus");
+        strcpy(a.nombres,"Brigida");
+        a.tipoCliente = 1;
+        a.medioPago = 3;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=27;
+        strcpy(a.apellido,"Cletus");
+        strcpy(a.nombres,"Jaudelia");
+        a.tipoCliente = 1;
+        a.medioPago = 2;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=28;
+        strcpy(a.apellido,"Cletus");
+        strcpy(a.nombres,"Teodosia");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+
+        a.id=29;
+        strcpy(a.apellido,"Cletus");
+        strcpy(a.nombres,"Jacinta");
+        a.tipoCliente = 1;
+        a.medioPago = 1;
+        a.tiempoEspera=0;
+        a.tiempoProcesado=0;
+        a.eliminado=0;
+        fwrite(&a,sizeof(stPersona),1,archi);
+    }
+
+    fclose(archi);
+}
+
 
 
 // Muestra
@@ -525,7 +847,8 @@ void muestraAmbos(char nombre_archivo_usuarios[],char nombre_archivo_personas[],
 //  Modificación
 
 void modificaPersonaPorId (char nombre_archivo_personas[])
-{ /* Esta funcion originalmente modificaba ambas estructuras, si se necesita modificar la estructura de usuarios buscar en la original, or just recode it you lazy fuck */
+{
+    /* Esta funcion originalmente modificaba ambas estructuras, si se necesita modificar la estructura de usuarios buscar en la original, or just recode it you lazy fuck */
 
     FILE *archiPersona;
     stPersona p;
@@ -821,6 +1144,9 @@ int eliminaPersonas(char nombre_archivo_personas[])
 }
 
 
+
+//  Encriptación
+
 void encriptaPass (char pass[11],int *passEnciptada[3][6])
 {
     int i,j,k=0;
@@ -883,6 +1209,9 @@ void decriptaPass (int passEncriptada[3][6],char pass[11])
 }
 
 
+
+//  Consulta
+
 void consultaUsuario(char archivoUsuarios[],char archivoPersonas[])
 {
     int existe=0;
@@ -925,6 +1254,24 @@ void consultaUsuario(char archivoUsuarios[],char archivoPersonas[])
     fclose(archiUsuario);
     fclose(archiPersona);
 }
+
+int cantidadPersonasCargadas(char archivoPersonas[])
+{   /// Devuelve la cantidad de personas cargadas en el archivo
+    int personasCargadas = 0;
+    FILE * archi;
+    archi = fopen(archivoPersonas,"r+b");
+    fseek(archi,0,SEEK_SET);
+
+    while (fgetc(archi)!=EOF)
+    {
+        fseek(archi,sizeof(stPersona),SEEK_CUR);
+        personasCargadas++;
+    }
+    return personasCargadas;
+}
+
+
+//  Busqueda
 
 int buscaUsuario (char usuario_a_buscar[],char archivoUsuarios[])
 {
@@ -1005,3 +1352,6 @@ int buscaPersonaPorId (int id_persona_a_buscar[],char archivoPersonas[])
     fclose(archi);
     return existe;
 }
+
+
+

@@ -27,6 +27,7 @@ int admin(char archivoUsuarios[],char archivoPersonas[]); // Retorna 1 cuando se
 //  Carga
 void cargaUsuarios(char nombre_archivo_usuarios[]);
 int cargaPersonas(char nombre_archivo_personas[]); // retorna el id asignado al cliente
+void cargaPersonasAlArchivo();
 
 //  Muestra
 void muestraUsuarios(char nombre_archivo[]);
@@ -46,6 +47,7 @@ void decriptaPass (int passEncriptada[3][6],char pass[11]);
 
 //  Consulta
 void consultaUsuario(char archivoUsuarios[],char archivoPersonas[]);
+int cantidadPersonasCargadas(char archivoPersonas[]);
 
 //  Busqueda
 int buscaUsuario (char usuario_a_buscar[],char archivoUsuarios[]);

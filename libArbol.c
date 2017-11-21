@@ -3,13 +3,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Inicia Arbol
+char archivoUsuarios[]={"usuarios.dat"};
+char archivoPersonas[]={"personas.dat"};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/*                                    Funciones de Arbol                                        */
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//  Inicia Arbol
 nodoArbol* inicArbol()
 {
     return NULL;
 }
 
-// Crea nodo Arbol
+//  Crea nodo Arbol
 nodoArbol* crearNodoArbol (int legajo, char nombre[20])
 {   /// Esta funcion no se usa en el main, es necesaria para las funciones de inserción
     nodoArbol * aux = (nodoArbol*)malloc(sizeof(nodoArbol));
@@ -24,7 +33,7 @@ nodoArbol* insertarNodoArbol (nodoArbol * arbol, int legajo, char nombre[20])
 {
     if (arbol == NULL)
     {
-        arbol = crearNodoArbol (legajo,nombre   );
+        arbol = crearNodoArbol (legajo,nombre);
     }
     else
     {
@@ -35,6 +44,7 @@ nodoArbol* insertarNodoArbol (nodoArbol * arbol, int legajo, char nombre[20])
     return arbol;
 }
 
+//  Orders
 void preOrder (nodoArbol * arbol)
 {
     if (arbol != NULL)
@@ -44,7 +54,6 @@ void preOrder (nodoArbol * arbol)
         preOrder (arbol -> der);
     }
 }
-
 void inOrder (nodoArbol * arbol)
 {
     if (arbol != NULL)
@@ -54,7 +63,6 @@ void inOrder (nodoArbol * arbol)
         inOrder (arbol -> der);
     }
 }
-
 void postOrder (nodoArbol * arbol)
 {
     if (arbol != NULL)
@@ -65,6 +73,7 @@ void postOrder (nodoArbol * arbol)
     }
 }
 
+//  Busqueda
 nodoArbol* buscarArbol (nodoArbol * arbol, int legajo)
 {
     nodoArbol* rta = NULL;
@@ -77,12 +86,12 @@ nodoArbol* buscarArbol (nodoArbol * arbol, int legajo)
         else if (legajo > arbol -> legajo)
             buscarArbol (arbol -> der, legajo);
 
-        else buscarArbol (arbol -> izq, legajo);
+        else buscarArbol(arbol -> izq, legajo);
     }
     return rta;
 }
 
-
+//  Suma
 int sumaArbol (nodoArbol* arbol)
 {
     int suma = 0;
@@ -91,8 +100,18 @@ int sumaArbol (nodoArbol* arbol)
     return suma;
 }
 
+//  Carga clientes al Arbol
+void cargaPersonasAlArbol()
+{
+    stPersona cliente;
+    FILE* archi = fopen(archivoPersonas,"r+b");
+    if (archi == NULL)
+        printf("\n\n  Se encontro un error al cargar el arbol. Cierre el programa y contacte a su administrador. (Error:%d)",errno);
 
 
+
+
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
