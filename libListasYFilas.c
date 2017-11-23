@@ -21,29 +21,6 @@ nodo* crearNodoLista (stPersona cliente)
     return aux;
 }
 
-nodo* agregarAlPrincipio (nodo* lista, nodo* nuevoNodo)
-{
-    nuevoNodo->siguiente = lista;
-    if (lista!=NULL)
-    {
-        lista->anterior = nuevoNodo;
-    }
-    return nuevoNodo;
-}
-nodo* agregarAlFinal (nodo* lista, nodo* nuevoNodo)
-{
-
-    if (lista == NULL)
-        lista = nuevoNodo;
-    else
-    {
-        nodo* ultimoNodo = buscaUltimoNodo(lista);
-        ultimoNodo->siguiente = nuevoNodo;
-        nuevoNodo->anterior = ultimoNodo;
-    }
-    return lista;
-}
-
 
 nodo* buscaUltimoNodo (nodo* lista)
 {
@@ -73,6 +50,31 @@ nodo* buscaNodoSegunNombre (nodo* lista,char nombres[])
     }
     return encontrado;
 }
+
+nodo* agregarAlPrincipio (nodo* lista, nodo* nuevoNodo)
+{
+    nuevoNodo->siguiente = lista;
+    if (lista!=NULL)
+    {
+        lista->anterior = nuevoNodo;
+    }
+    return nuevoNodo;
+}
+nodo* agregarAlFinal (nodo* lista, nodo* nuevoNodo)
+{
+
+    if (lista == NULL)
+        lista = nuevoNodo;
+    else
+    {
+        nodo* ultimoNodo = buscaUltimoNodo(lista);
+        ultimoNodo->siguiente = nuevoNodo;
+        nuevoNodo->anterior = ultimoNodo;
+    }
+    return lista;
+}
+
+
 
 nodo* borrarNodo (nodo* lista, char nombres[])
 {

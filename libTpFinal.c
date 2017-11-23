@@ -8,12 +8,10 @@
 //#include "libListasYFilas.h"
 #include "libTpFinal.h"
 
-char archivoUsuarios[]={"usuarios.dat"};
-char archivoPersonas[]={"personas.dat"};
 
 //  Funciones Principales
 
-void login(char archivoUsuarios[],char archivoPersonas[])
+void login()
 {
     int usuarioReconocido=0;
     int salir=0;
@@ -97,7 +95,7 @@ void login(char archivoUsuarios[],char archivoPersonas[])
     fclose(archiPersona);
 }
 
-int admin(char archivoUsuarios[],char archivoPersonas[]) // Retorna 1 cuando se sale del sistema
+int admin() // Retorna 1 cuando se sale del sistema
 {
     int opcion=-1,subOpcion=-1,orden=0,retorno=0;
     while(opcion!=0)
@@ -175,11 +173,11 @@ int admin(char archivoUsuarios[],char archivoPersonas[]) // Retorna 1 cuando se 
                         switch (subOpcion)
                         {
                             case 0: break; // Vuelve a admin
-                            case 1: muestraAmbos(archivoUsuarios,archivoPersonas,"porId");
+                            case 1: //muestraAmbos(archivoUsuarios,archivoPersonas,"porId"); /// Func muestraAmbos desabilitada, no tiene sentido
                                     break;
-                            case 2: muestraAmbos(archivoUsuarios,archivoPersonas,"porApellido");
+                            case 2: //muestraAmbos(archivoUsuarios,archivoPersonas,"porApellido");
                                     break;
-                            case 3: muestraAmbos(archivoUsuarios,archivoPersonas,"porDomicilio");
+                            case 3: //muestraAmbos(archivoUsuarios,archivoPersonas,"porDomicilio");
                                     break;
                             case 4: muestraUsuarios(archivoUsuarios);
                                     subOpcion=3; /*evita que vuelva a entrar al do while*/
@@ -220,7 +218,7 @@ int admin(char archivoUsuarios[],char archivoPersonas[]) // Retorna 1 cuando se 
 
 //  Carga
 
-void cargaUsuarios(char nombre_archivo_usuarios[])
+void cargaUsuarios()
 {
     char passlocal[11];
     char control='s';
@@ -228,7 +226,7 @@ void cargaUsuarios(char nombre_archivo_usuarios[])
     stUsuario a;
     stUsuario anterior; /// Para saber cuál fue el ultimo Id asignado
     FILE * archi;
-    archi=fopen(nombre_archivo_usuarios,"a+b");
+    archi=fopen(archivoUsuarios,"a+b");
 
     while(control=='s')
     {
@@ -239,7 +237,7 @@ void cargaUsuarios(char nombre_archivo_usuarios[])
         fflush(stdin);
         scanf("%s",a.usuario);
 
-        while (buscaUsuario(a.usuario,nombre_archivo_usuarios) == 1 || strcmp(a.usuario,"admin") == 0 || strcasecmp(a.usuario,"salir") == 0)
+        while (buscaUsuario(a.usuario) == 1 || strcmp(a.usuario,"admin") == 0 || strcasecmp(a.usuario,"salir") == 0)
         {
             printf("\n\n                                                                            [M\xA0x: 20 caracteres]");
             printf("\n El usuario %s ya existe o es inv\xA0\x6C\x69\x64\x6F\x2C por favor elija un nuevo usuario: ",a.usuario);
@@ -280,20 +278,20 @@ void cargaUsuarios(char nombre_archivo_usuarios[])
 
         printf("Desea crear otro usuario? (s/n) ");
         fflush(stdin);
-        scanf("%c", &control);
+        scanf("%c",&control);
         system("cls");
     }
     fclose(archi);
 }
 
-int cargaPersonas(char nombre_archivo_personas[]) // retorna el id asignado al cliente
+int cargaPersonas() // retorna el id asignado al cliente
 {
     char control='s';
 
     stPersona a;
     stPersona anterior; //para saber cual fue el ultimo id asignado
     FILE * archi;
-    archi=fopen(nombre_archivo_personas,"a+b");
+    archi=fopen(archivoPersonas,"a+b");
 
     while(control=='s')
     {
@@ -336,7 +334,7 @@ int cargaPersonas(char nombre_archivo_personas[]) // retorna el id asignado al c
 
         printf("  \xA8\x44\x64sea dar de alta a otro cliente? (s/n) ");
         fflush(stdin);
-        scanf("%c", &control);
+        scanf("%c",&control);
         system("cls");
     }
     fclose(archi);
@@ -660,11 +658,11 @@ void cargaPersonasAlArchivo ()
 
 // Muestra
 
-void muestraUsuarios(char nombre_archivo[])
+void muestraUsuarios()
 {
     FILE *archi;
     stUsuario a;
-    archi=fopen(nombre_archivo, "rb");
+    archi=fopen(archivoUsuarios, "rb");
 
     system("cls");
     printf("\n\n   ______________________\n   | Modo Administrador |\n   ----------------------\n\n\n");
@@ -698,7 +696,6 @@ void muestraUsuarios(char nombre_archivo[])
 }
 void mostrarUsuario(stUsuario a)
 {
-    int i;
     char passDesencriptadaLocal[11];
 
     decriptaPass(a.pass,passDesencriptadaLocal);
@@ -707,11 +704,11 @@ void mostrarUsuario(stUsuario a)
     printf("\n  Contrase\xA4\x61: %s",passDesencriptadaLocal);
 }
 
-void muestraPersonas(char nombre_archivo[])
+void muestraPersonas()
 {
     FILE *archi;
     stPersona a;
-    archi=fopen(nombre_archivo, "rb");
+    archi=fopen(archivoPersonas, "rb");
 
     system("cls");
     printf("\n\n   ______________________\n   | Modo Administrador |\n   ----------------------\n\n\n");
@@ -749,15 +746,15 @@ void mostrarPersona(stPersona a)
     printf("\n  Prioridad : %d", a.tipoCliente);
     printf("\n       Abona: %d\n\n ",a.medioPago);
 }
-
-void muestraAmbos(char nombre_archivo_usuarios[],char nombre_archivo_personas[],char criterio[])
+/* Funcion muestraAmbos desabilitada, la dejo comentada por si algo del código sirve
+void muestraAmbos(char criterio[]) // Creo que esta funcion ya no tiene sentido thus la saco, por si acaso dejo la funcion, uno nunca sabe
 {
     FILE *archiUsuario,*archiPersona;
     stUsuario a,usuarioAux;
     stPersona p,clienteAux;
 
-    archiUsuario=fopen(nombre_archivo_usuarios, "rb");
-    archiPersona=fopen(nombre_archivo_personas, "rb");
+    archiUsuario=fopen(archivoUsuarios, "rb");
+    archiPersona=fopen(archivoPersonas, "rb");
 
     system("cls");
     printf("\n\n   ______________________\n   | Modo Administrador |\n   ----------------------\n\n\n");
@@ -804,7 +801,7 @@ void muestraAmbos(char nombre_archivo_usuarios[],char nombre_archivo_personas[],
 
 
 
-    /*  // ORDENADO COMO VIENE
+    // ORDENADO COMO VIENE
     int i=0;
     int eliminados=0;
 
@@ -839,21 +836,19 @@ void muestraAmbos(char nombre_archivo_usuarios[],char nombre_archivo_personas[],
         getchar();
 
     }
-*/
 }
-
-
+*/
 
 //  Modificación
 
-void modificaPersonaPorId (char nombre_archivo_personas[])
+void modificaPersonaPorId ()
 {
     /* Esta funcion originalmente modificaba ambas estructuras, si se necesita modificar la estructura de usuarios buscar en la original, or just recode it you lazy fuck */
 
-    FILE *archiPersona;
+    FILE* archiPersona;
     stPersona p;
 
-    archiPersona=fopen(nombre_archivo_personas, "rb+");
+    archiPersona=fopen(archivoPersonas,"rb+");
 
     system("cls");
     printf("\n\n   ______________________\n   | Modo Administrador |\n   ----------------------\n\n\n");
@@ -911,12 +906,12 @@ void modificaPersonaPorId (char nombre_archivo_personas[])
                 case 1:
                         printf("\n Nuevo n\xA3mero de identificaci\nA2n: ");
                         fflush(stdin);
-                        scanf("%d",p.id);
-                        while (buscaPersonaPorId(p.id,nombre_archivo_personas) == 1 || id ==0)
+                        scanf("%d",&p.id);
+                        while (buscaPersonaPorId(p.id) == 1 || id == 0)
                         {
                             printf("\n\n El id #%d ya existe o es inv\xA0\x6C\x69\x64\x6F\x2C por favor elija un nuevo id: ",id);
                             fflush(stdin);
-                            scanf("%d",p.id);
+                            scanf("%d",&p.id);
                         }
                         break;
                 case 2:
@@ -932,12 +927,12 @@ void modificaPersonaPorId (char nombre_archivo_personas[])
                 case 4:
                         printf("\n Nuevo Tipo de cliente: ");
                         fflush(stdin);
-                        scanf("%d",p.tipoCliente);
+                        scanf("%d",&p.tipoCliente);
                         break;
                 case 5:
                         printf("\n Nuevo Medio de Pago: ");
                         fflush(stdin);
-                        scanf("%d",p.medioPago);
+                        scanf("%d",&p.medioPago);
                         break;
             }
             if (campo_a_modificar != 0)
@@ -964,11 +959,11 @@ void modificaPersonaPorId (char nombre_archivo_personas[])
     fclose(archiPersona);
 }
 
-int eliminaUsuario(char nombre_archivo_usuarios[])
+int eliminaUsuario()
 {
     FILE *archiUsuario;                                         /*        Devuelve:         */
     stUsuario a;                                                /*      0 si no elimina     */
-    archiUsuario=fopen(nombre_archivo_usuarios, "rb+");         /*       1 si elimina       */
+    archiUsuario=fopen(archiUsuario, "rb+");         /*       1 si elimina       */
 
     system("cls");
     printf("\n\n   ______________________\n   | Modo Administrador |\n   ----------------------\n\n\n");
@@ -991,7 +986,7 @@ int eliminaUsuario(char nombre_archivo_usuarios[])
         scanf("%s",usuario_a_eliminar);
 
         // Checkea que exista
-        while (buscaUsuario(usuario_a_eliminar,nombre_archivo_usuarios) == 0)
+        while (buscaUsuario(usuario_a_eliminar) == 0)
         {
             printf("\n El usuario %s no existe      [ Tip: Si desea volver al men\xA3 ingrese \"salir\" ]\n\n Ingrese otro usuario a dar de baja: ",usuario_a_eliminar);
             fflush(stdin);
@@ -1055,11 +1050,11 @@ int eliminaUsuario(char nombre_archivo_usuarios[])
     return(eliminado);
 }
 
-int eliminaPersonas(char nombre_archivo_personas[])
+int eliminaPersonas()
 {
-    FILE *archiPersona;                                         /*          Devuelve:       */
+    FILE* archiPersona;                                         /*          Devuelve:       */
     stPersona p;                                                /*      0 si no elimina     */
-    archiPersona=fopen(nombre_archivo_personas, "rb+");         /*      1 si elimina        */
+    archiPersona=fopen(archivoPersonas, "rb+");         /*      1 si elimina        */
 
     system("cls");
     printf("\n\n   ______________________\n   | Modo Administrador |\n   ----------------------\n\n\n");
@@ -1081,7 +1076,7 @@ int eliminaPersonas(char nombre_archivo_personas[])
         scanf("%s",cliente_a_eliminar);
 
         // Checkea que exista
-        while (buscaPersonaPorNombre(cliente_a_eliminar,nombre_archivo_personas) == 0)
+        while (buscaPersonaPorNombre(cliente_a_eliminar) == 0)
         {
             printf("\n El cliente %s no existe      [ Tip: Si desea volver al men\xA3 ingrese \"salir\" ]\n\n Ingrese otro usuario a dar de baja: ",cliente_a_eliminar);
             fflush(stdin);
@@ -1212,7 +1207,7 @@ void decriptaPass (int passEncriptada[3][6],char pass[11])
 
 //  Consulta
 
-void consultaUsuario(char archivoUsuarios[],char archivoPersonas[])
+void consultaUsuario()
 {
     int existe=0;
     char usuarioTeclado[20];
@@ -1255,7 +1250,7 @@ void consultaUsuario(char archivoUsuarios[],char archivoPersonas[])
     fclose(archiPersona);
 }
 
-int cantidadPersonasCargadas(char archivoPersonas[])
+int cantidadPersonasCargadas()
 {   /// Devuelve la cantidad de personas cargadas en el archivo
     int personasCargadas = 0;
     FILE * archi;
@@ -1273,7 +1268,7 @@ int cantidadPersonasCargadas(char archivoPersonas[])
 
 //  Busqueda
 
-int buscaUsuario (char usuario_a_buscar[],char archivoUsuarios[])
+int buscaUsuario (char usuario_a_buscar[])
 {
     int existe=0;                                   /*      Devuelve                */
     stUsuario a;                                    /*   0 si el usuario no existe  */
@@ -1293,7 +1288,7 @@ int buscaUsuario (char usuario_a_buscar[],char archivoUsuarios[])
     fclose(archi);
     return existe;
 }
-int buscaUsuarioPorId (int id_usuario_a_buscar, char archivoUsuarios[])
+int buscaUsuarioPorId (int id_usuario_a_buscar)
 {
     int existe = 0;
     stUsuario a;
@@ -1313,7 +1308,7 @@ int buscaUsuarioPorId (int id_usuario_a_buscar, char archivoUsuarios[])
     return existe;
 }
 
-int buscaPersonaPorNombre (char persona_a_buscar[],char archivoPersonas[])
+int buscaPersonaPorNombre (char persona_a_buscar[])
 {
     int existe=0;                                   /*      Devuelve                */
     stPersona a;                                    /*   0 si el usuario no existe  */
@@ -1333,7 +1328,7 @@ int buscaPersonaPorNombre (char persona_a_buscar[],char archivoPersonas[])
     fclose(archi);
     return existe;
 }
-int buscaPersonaPorId (int id_persona_a_buscar[],char archivoPersonas[])
+int buscaPersonaPorId (int id_persona_a_buscar)
 {
     int existe = 0;                                 /*      Devuelve:               */
     stPersona p;                                    /*   0 si el usuario no existe  */

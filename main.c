@@ -8,8 +8,6 @@
 //   Para Modo Administrador: Usuario:admin
 //                            Contraseña: admin
 
-char archivoUsuarios[]={"usuarios.dat"};
-char archivoPersonas[]={"personas.dat"};
 
 void main()
 {

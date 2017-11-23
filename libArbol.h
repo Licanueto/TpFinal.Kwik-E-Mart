@@ -6,7 +6,7 @@
 /*                                    Prototipado de Arbol                                      */
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
 //  Arbol
 typedef struct{
     int legajo;
@@ -14,7 +14,7 @@ typedef struct{
     struct nodoArbol* izq;
     struct nodoArbol* der;
 }nodoArbol;
-
+*/
 //  Funciones Básicas
 nodoArbol* inicArbol();
 nodoArbol* crearNodoArbol (int legajo, char nombre[20]);

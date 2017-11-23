@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-char archivoUsuarios[]={"usuarios.dat"};
-char archivoPersonas[]={"personas.dat"};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /*                                    Funciones de Arbol                                        */
@@ -20,7 +18,7 @@ nodoArbol* inicArbol()
 
 //  Crea nodo Arbol
 nodoArbol* crearNodoArbol (int legajo, char nombre[20])
-{   /// Esta funcion no se usa en el main, es necesaria para las funciones de inserciÃ³n
+{   /// Esta funcion no se usa en el main, es necesaria para las funciones de inserción
     nodoArbol * aux = (nodoArbol*)malloc(sizeof(nodoArbol));
     aux -> legajo = legajo;
     strcpy(aux -> nombre, nombre);
@@ -38,7 +36,7 @@ nodoArbol* insertarNodoArbol (nodoArbol * arbol, int legajo, char nombre[20])
     else
     {
         if (legajo > arbol->legajo)
-            arbol->der = insertarNodoArbol (arbol->der,legajo,nombre);       ///    NÃ³tese la recursividad
+            arbol->der = insertarNodoArbol (arbol->der,legajo,nombre);       ///    Nótese la recursividad
         else arbol->izq = insertarNodoArbol (arbol->izq,legajo,nombre);
     }
     return arbol;
